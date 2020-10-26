@@ -1,0 +1,64 @@
+{
+  "project_info": {
+    "project_number": "117723550668",
+    "firebase_url": "https://dinlendirici-2e5cb.firebaseio.com",
+    "project_id": "dinlendirici-2e5cb",
+    "storage_bucket": "dinlendirici-2e5cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117723550668:android:d4bc7d28b8f717b5",
+        "android_client_info": {
+          "package_name": "com.kutay.huzeyfe.yuxu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117723550668-np8avtlsi0j8huatbu03rcil76cj8j9s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kutay.huzeyfe.yuxu",
+            "certificate_hash": "c2915e79e7361320c6246d2f81b205910bf6b476"
+          }
+        },
+        {
+          "client_id": "117723550668-6rrnk7op0d6k0ep0anl11760mg4hda4n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kutay.huzeyfe.yuxu",
+            "certificate_hash": "a6f0bf55b63be265c631171196dd8d4b3a945d8f"
+          }
+        },
+        {
+          "client_id": "117723550668-f8f65fv2g8g8lu6qskn0n5opqq0mjon3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXO-ZZ2Y5glccb9jQM8lzTWZo0bP8WceY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117723550668-f8f65fv2g8g8lu6qskn0n5opqq0mjon3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "117723550668-sq23cv30obp1cu5bkqph2k1tmpv55vag.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kutay.huzeyfe.yuxu"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-1846923363747525~9111528874"
+    }
+  ],
+  "configuration_version": "1"
+}

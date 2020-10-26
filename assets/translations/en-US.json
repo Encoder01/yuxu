@@ -1,0 +1,41 @@
+{
+  "forest": "Nature and Forest",
+  "city": "City and Environment",
+  "weather": "Weather and Rain",
+  "mind": "Focus and Meditation",
+  "mix": "From Earth",
+  "music1": "Sleep and Focus",
+  "music2": "Journey and Serenity",
+
+  "res": "Reset",
+  "pause": "Pause",
+  "start": "Start",
+  "cancel": "Cancel",
+  "turk": "Türkçe",
+  "rus": "русский",
+  "eng": "English",
+
+
+  "setngs": "Settings",
+  "notif": "Effects are playing",
+  "reduce": "Audio Slowly Decrease",
+  "reklam": "Remove ADS",
+  "dark": "Dark Mode",
+  "day": "Day Mode",
+  "lang": "Change Language",
+  "langtitle": "Choose Language",
+
+
+  "yes": "Yes",
+  "no": "No",
+  "darkMsg": "Application will be restart are you sure?",
+  "toastEfekt": "You can select up only 7 Sounds",
+  "alertMusic": "Effects will turn off if you open Music",
+  "alertEfekt": "Music will turn off if you open Effects",
+  "music": "Musics",
+  "efekt": "Effects",
+  "isCon": "Please check your internet connection",
+  "sec": "Seconds",
+  "sectitle": "Choose Time",
+  "isActive": "Please Re-open the music"
+}
