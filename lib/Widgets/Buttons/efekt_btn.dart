@@ -100,8 +100,13 @@ class _EfektButtonState extends State<EfektButton>
                             if (!PlayerController.audios.singleWhere((element) =>
                             element.id == _player.playerId).visible && notifier.sayiKontrol < 7)
                             {
-                              openMusic();
                               notifier.increment();
+
+                              if (MainPage.isPlay == false && notifier.sayiKontrol>1) {
+                                FadeOut().fadefadeIn();
+                              }else if(MainPage.isPlay==false)
+                                PlayerController.resume();
+                              openMusic();
                               return;
                             }
                             if (PlayerController.audios.singleWhere((element) =>
@@ -127,11 +132,59 @@ class _EfektButtonState extends State<EfektButton>
                   visible: PlayerController.audios
                       .singleWhere((element) => element.id == _player.playerId)
                       .visible,
-                  child: Container(
-                    height: 21,
-                    decoration:
-                    BoxDecoration(color: color[0], borderRadius: BorderRadius.circular(30)),
-                    child: FlutterSlider(
+                  child: StatefulBuilder(
+                      builder: (BuildContext context, setStates){
+                      return FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: Container(
+                          height: 50,
+                          child: Container(
+                            decoration:  BoxDecoration(color: color[0], borderRadius: BorderRadius.circular(30),),
+                            child: SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                activeTrackColor: color[1],
+                                inactiveTrackColor: color[1].withOpacity(0.3),
+                                trackShape: RectangularSliderTrackShape(),
+                                trackHeight: 6.0,
+                                thumbColor: color[1],
+                                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                                overlayColor: color[1],
+                                overlayShape: RoundSliderOverlayShape(overlayRadius: 18.0),
+                              ),
+                              child: Slider(
+                                value:  _audio.volume,
+                                min: 0,
+                                max: 100,
+                                onChangeEnd: (value){
+                                  PlayerController.audios.forEach((element) {
+                                    if(element.sesPath==_audio.sesPath){
+                                      element.volume=value;
+                                    }
+                                  });
+                                },
+                                onChanged: (double value) {
+                                  _player.setVolume(value / (ses=='ses/Mix/mix_kalp.m4a'?10:100));
+                                  setStates(() {
+                                    _audio.volume=value;
+                                  });
+
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      }
+    );
+  }
+  /*FlutterSlider(
                       onDragCompleted: (handlerIndex, lowerValue, upperValue)
                       {
                         PlayerController.audios.forEach((element) {
@@ -142,11 +195,6 @@ class _EfektButtonState extends State<EfektButton>
                       },
                       onDragging: (handlerIndex, lowerValue, upperValue) {
                         _player.setVolume(lowerValue / (ses=='ses/Mix/mix_kalp.m4a'?10:100));
-                        PlayerController.audios.forEach((element) {
-                          if(element.sesPath==_audio.sesPath){
-                            element.volume=lowerValue;
-                          }
-                        });
                       },
                       handlerWidth: 20,
                       handlerHeight: 20,
@@ -172,18 +220,9 @@ class _EfektButtonState extends State<EfektButton>
                       max: 100,
                       min: 0,
                       values: [
-                      sess()
+                     sess()
                       ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      }
-    );
-  }
+                    )*/
 double sess(){
     double ses;
   PlayerController.audios.forEach((element) {
@@ -194,9 +233,6 @@ double sess(){
   return ses;
 }
   openMusic() {
-    if (MainPage.isPlay == false) {
-     FadeOut().fadefadeIn();
-    }
 
     PlayerController.audios.singleWhere((element) =>
     element.id == _player.playerId).visible =
