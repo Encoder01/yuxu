@@ -1,19 +1,18 @@
 
+
 import 'package:audioplayers/audio_cache.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:mindfocus/Model/Audio.dart';
-class PlayerController extends ChangeNotifier{
+import 'package:mindfocus/Model/audio_model.dart';
+class PlayerController  {
   static bool isEfect = true;
   static bool isMusic = true;
-  static List<Audio> audios=[];
-  static List<Audio> Players =[];
+
+  static List<AudioModel> audios=[];
+  static List<AudioModel> Players =[];
 
   static stop(String pID){
     PlayerController.audios.forEach((element) {
       if(element.id==pID){
      element.players.stop();
-     element.players.release();
-     AudioCache().clear(element.sesPath);
       }
     });
   }

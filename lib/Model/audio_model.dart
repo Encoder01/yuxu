@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:audioplayers/audioplayers.dart';
 
-class Audio{
+
+
+class AudioModel{
   String id;
   String icon1;
   String icon2;
@@ -11,6 +13,6 @@ class Audio{
   double volume;
   bool visible;
   AudioPlayer players;
-  Audio({this.id,this.volume,this.icon1,this.icon2,this.color,this.sesPath,this.visible,this.players});
+  AudioModel({this.id,this.volume,this.icon1,this.icon2,this.color,this.sesPath,this.visible,this.players});
 
 }

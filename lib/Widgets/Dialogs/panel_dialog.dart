@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:mindfocus/Controller/PlayerController.dart';
@@ -52,7 +51,7 @@ class _PanelDialogState extends State<PanelDialog> {
                                   element.id ==
                                       PlayerController.Players[indexs].players.playerId)
                                       .volume = lowerValue;
-                                  context.read<CounterNotifier>().updateUI();
+                                  CounterNotifier.updateUI();
 
                                 },
                                 onDragging: (handlerIndex, lowerValue, upperValue) {
@@ -117,9 +116,9 @@ class _PanelDialogState extends State<PanelDialog> {
                                           PlayerController.Players[indexs].players.playerId);
                                       PlayerController.Players.removeAt(indexs);
                                     });
-                                    context.read<CounterNotifier>().decrement();
-                                    if(context.read<CounterNotifier>().sayiKontrol==0)
-                                    Navigator.pop(context);
+                                    CounterNotifier.decrement();
+                                    if(CounterNotifier.sayiKontrol.value==0)
+                                      Navigator.pop(context);
                                   },
                                   icon: Icon(
                                     Icons.cancel,

@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 2.1.3+9
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -24,27 +24,30 @@ dependencies:
   flutter:
     sdk: flutter
   #For Navigation and state package
-  get: ^3.13.2
-  provider: ^4.3.2+2
-  shared_preferences: ^0.5.12
+  path_provider: ^1.6.5
+  hive: ^1.4.4+1
+  hive_flutter: ^0.3.1
   #İmage Design more
   flutter_xlider: ^3.4.0
   flutter_svg: ^0.19.0
   timer_count_down: ^1.0.4+1
   cupertino_icons: ^1.0.0
+  flushbar: ^1.10.4
   #players
-  audioplayers: ^0.16.1
-  audio_manager: ^0.5.5+3
-  #resource and internet
-  http: ^0.12.2
-  path_provider: ^1.6.21
+  audio_manager: 0.5.5+3
+  audioplayers: 0.17.2
+  http:
+  intl: ^0.16.1
   easy_localization: ^2.3.3
-  firebase_admob: ^0.10.0+2
-  firebase_core: ^0.5.0+1
-  firebase_analytics: ^6.0.2
+  facebook_app_events: ^0.8.2
+  #facebook_audience_network: ^0.8.0
+  firebase_admob: ^0.10.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  hive_generator: ^0.8.2
+  build_runner:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -54,7 +57,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/translations/
-    - assets/logo.png
+    - assets/logo.jpg
     - assets/Buttons/Nature/v1/icon_1.svg
     - assets/Buttons/Nature/v1/icon_2.svg
     - assets/Buttons/Nature/v1/icon_3.svg
