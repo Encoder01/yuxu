@@ -3,7 +3,7 @@
   "city": "City and Environment",
   "weather": "Weather and Rain",
   "mind": "Focus and Meditation",
-  "mix": "From Earth",
+  "mix": "Mixed",
   "music1": "Sleep and Focus",
   "music2": "Journey and Serenity",
 
@@ -12,7 +12,7 @@
   "start": "Start",
   "cancel": "Cancel",
   "turk": "Türkçe",
-  "rus": "русский",
+  "rus": "Русский",
   "eng": "English",
 
 
@@ -25,7 +25,7 @@
   "lang": "Change Language",
   "langtitle": "Choose Language",
 
-
+  "okay": "Okay",
   "yes": "Yes",
   "no": "No",
   "darkMsg": "Application will be restart are you sure?",
