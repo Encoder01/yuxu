@@ -1,32 +1,31 @@
-import 'package:flutter/cupertino.dart';
+
+import 'package:flutter/material.dart';
+
+class CounterNotifier extends ValueNotifier<int> {
+  static ValueNotifier<int> sayiKontrol=ValueNotifier(0);
+
+  CounterNotifier(int value) : super(value);
 
 
-class CounterNotifier extends ChangeNotifier {
-  int _sayiKontrol;
-
-CounterNotifier(){
-  _sayiKontrol=0;
-}
 
 
-  int get sayiKontrol => _sayiKontrol;
-
-
-  void increment() {
-    _sayiKontrol++;
-    notifyListeners();
+  static void increment() {
+    sayiKontrol.value++;
+    print("sayiKontrol.value*************************");
+  //  notifyListeners();
   }
-  void sifirla(){
-  _sayiKontrol=0;
-  notifyListeners();
+  static void sifirla(){
+  sayiKontrol.value=0;
+//notifyListeners();
   }
-  void updateUI(){
-  _sayiKontrol=_sayiKontrol;
-  notifyListeners();
+  static void updateUI(){
+    increment();
+    decrement();
+  //notifyListeners();
   }
-  void decrement() {
-  _sayiKontrol--;
-  notifyListeners();
+  static void decrement() {
+  sayiKontrol.value--;
+ // notifyListeners();
   }
 }
 

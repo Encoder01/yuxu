@@ -51,11 +51,9 @@ class FadeOut {
     }else{
       PlayerController.pause();
     }
-
-
   }
 
-  fadefadeIn() {
+  FadeIn() {
     double _start = 0;
     double fVolume = 0.2;
     const oneSec = const Duration(milliseconds: 150);

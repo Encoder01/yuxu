@@ -1,5 +1,5 @@
 
-import 'package:firebase_admob/firebase_admob.dart';
+//import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mindfocus/Controller/theme.dart';
@@ -17,21 +17,18 @@ class MainPage extends StatefulWidget {
 }
 class MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin {
   int _selectedPage = 0;
-  AdmobService admob = new AdmobService();
 
   @override
   void initState() {
-    FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
-    admob.bannerAd = admob.createBannerAd();
-     // ..load();
-      //..show(anchorOffset: 49);
+    AdmobService().showBanner();
     super.initState();
   }
 
+
   @override
   void dispose() {
-   // admob.bannerAd.dispose();
     super.dispose();
+    AdmobService().removeBanner();
   }
 
   @override
@@ -47,6 +44,29 @@ class MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin {
           offstage: _selectedPage != 1,
           child: SettingsPage(),
         ),
+        /*Container(
+          alignment: Alignment(0.5, 1),
+          child: FacebookBannerAd(
+            placementId: "148593593386504_148593640053166",
+            bannerSize: BannerSize.STANDARD,
+            listener: (result, value) {
+              switch (result) {
+                case BannerAdResult.ERROR:
+                  print("Error: $value");
+                  break;
+                case BannerAdResult.LOADED:
+                  print("Loaded: $value");
+                  break;
+                case BannerAdResult.CLICKED:
+                  print("Clicked: $value");
+                  break;
+                case BannerAdResult.LOGGING_IMPRESSION:
+                  print("Logging Impression: $value");
+                  break;
+              }
+            },
+          ),
+        ),*/
         Container(height: MediaQuery.of(context).size.height*0.83,
             child: Center(child: Align(alignment: Alignment.bottomCenter,child: PanelButton())))
       ]),

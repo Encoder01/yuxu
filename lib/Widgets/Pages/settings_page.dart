@@ -2,15 +2,18 @@ import 'package:audio_manager/audio_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:mindfocus/Controller/countProv.dart';
 import 'package:mindfocus/Controller/theme.dart';
 import 'package:mindfocus/Model/ColorsPack.dart';
 import 'package:mindfocus/Controller/PlayerController.dart';
-import 'package:mindfocus/Services/appbuild.dart';
 import 'package:mindfocus/Services/restart_widget.dart';
 import 'package:mindfocus/Widgets/Pages/main_page.dart';
-import 'package:provider/provider.dart';
+
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../main.dart';
 
 class SettingsPage extends StatefulWidget {
   static double lowVolume = 5;
@@ -116,8 +119,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
               ),
-              Consumer<ThemeNotifier>(
-                  builder: (context, ThemeNotifier notifier, child) {
+              ValueListenableBuilder(
+                valueListenable: Hive.box(darkModeBox).listenable(),
+                  builder: (context, Box  box, child) {
+                    var darkMode = box.get('darkMode', defaultValue: false);
                     return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: FlatButton(
@@ -135,23 +140,19 @@ class _SettingsPageState extends State<SettingsPage> {
                                       "no",
                                     ).tr(),
                                     onPressed: () => Navigator.pop(context)),
-                                Consumer<CounterNotifier>(
-                                    builder: (context, CounterNotifier count, child) {
-                                    return CupertinoButton(
-                                            child: Text(
-                                              "yes",
-                                              style: TextStyle(fontSize: 16,color: Colors.red),
-                                            ).tr(),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                              PlayerController.stopall();
-                                              count.sifirla();
-                                              AudioManager.instance.toPause();
-                                              notifier.toggleTheme();
-                                              RestartWidget.restartApp(context);
-                                            });
-                                  }
-                                ),
+                                CupertinoButton(
+                                    child: Text(
+                                      "yes",
+                                      style: TextStyle(fontSize: 16,color: Colors.red),
+                                    ).tr(),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      PlayerController.stopall();
+                                      CounterNotifier.sifirla();
+                                      AudioManager.instance.toPause();
+                                      box.put('darkMode', !darkMode);
+                                      RestartWidget.restartApp(context);
+                                    }),
                               ],
                             ),
                           );
@@ -235,6 +236,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
   updateNotf(){
-    AudioManager.instance.start("assets/ses/City/araba.m4a", "Mindfocus:Relax",desc:"notif".tr(),cover:"assets/logo.png");
+   AudioManager.instance.start("assets/ses/City/araba.m4a", "Mindfocus:Relax",desc:"notif".tr(),cover:"assets/logo.jpg");
   }
 }
