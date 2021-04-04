@@ -18,7 +18,7 @@
 
   "setngs": "Settings",
   "notif": "Effects are playing",
-  "reduce": "Audio Slowly Decrease",
+  "reduce": "Fade Out Sound",
   "reklam": "Remove ADS",
   "dark": "Dark Mode",
   "day": "Day Mode",
@@ -28,7 +28,7 @@
   "okay": "Okay",
   "yes": "Yes",
   "no": "No",
-  "darkMsg": "Application will be restart are you sure?",
+  "darkMsg": "Are you sure to log out",
   "toastEfekt": "You can select up only 7 Sounds",
   "alertMusic": "Effects will turn off if you open Music",
   "alertEfekt": "Music will turn off if you open Effects",

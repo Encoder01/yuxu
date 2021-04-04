@@ -1,51 +1,80 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:facebook_app_events/facebook_app_events.dart';
-import 'package:firebase_admob/firebase_admob.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import 'Services/Admob.dart';
-import 'Services/restart_widget.dart';
-import 'Widgets/Pages/main_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
-const darkModeBox = 'darkModeTutorial';
-bool darkmode = false;
-
+import 'package:mindfocus/Bloc/favplayer_bloc.dart';
+import 'package:mindfocus/Bloc/suggestion_bloc.dart';
+import 'package:mindfocus/Model/favorites_model.dart';
+import 'package:mindfocus/Services/authentication.dart';
+import 'package:mindfocus/Widgets/Pages/main_page.dart';
+import 'package:mindfocus/Widgets/SignPage/sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
+import 'Model/favorites.dart';
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await FirebaseAdMob.instance.initialize(appId: AdmobService().getAPPID(),analyticsEnabled:true,);
-
-  await Hive.initFlutter();
-  await Hive.openBox(darkModeBox);
+  await Firebase.initializeApp();
+  FacebookAudienceNetwork.init();
+  final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDir.path);
+  Hive.registerAdapter(FavoritesModelAdapter());
+  await Hive.openBox<FavoritesModel>("favoritesModel");
+  Hive.registerAdapter(FavoritesAdapter());
+  await Hive.openBox<Favorites>("favorites");
   runApp(
     EasyLocalization(
       child: MyApp(),
       startLocale: Locale('en', 'US'),
-      supportedLocales: [Locale('en', 'US'), Locale('tr', 'TR'), Locale('ru', 'RU')],
+      supportedLocales: [Locale('en', 'US'),Locale('tr', 'TR'),Locale('ru', 'RU')],
       path: 'assets/translations',
       fallbackLocale: Locale('en', 'US'),
     ),
   );
 }
-
 class MyApp extends StatelessWidget {
+  static FirebaseAnalytics analytics = FirebaseAnalytics();
+  static FirebaseAnalyticsObserver observer =
+  FirebaseAnalyticsObserver(analytics: analytics);
   @override
   Widget build(BuildContext context) {
-    return RestartWidget(
-        child: ValueListenableBuilder(
-            valueListenable: Hive.box(darkModeBox).listenable(),
-            builder: (context, box, widget) {
-              var darkMode = box.get('darkMode', defaultValue: false);
-              darkmode = darkMode;
-              return MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  localizationsDelegates: context.localizationDelegates,
-                  supportedLocales: context.supportedLocales,
-                  locale: context.locale,
-                  title: 'MindFocus',
-                  home: MainPage());
-            }));
+    return  MultiProvider(
+      providers: [
+        Provider<Authentication>(
+          create: (_) => Authentication(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) => context.read<Authentication>().authStateChanges,
+        ),
+      ],
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          title: 'MindFocus',
+          navigatorObservers: <NavigatorObserver>[observer],
+          home: AuthenticationWrapper()),
+    );
+  }
+}
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+    if (firebaseUser != null) {
+      if(firebaseUser.emailVerified||firebaseUser.isAnonymous){
+        return MultiBlocProvider(providers: [
+          BlocProvider(create: (context) => FavplayerBloc()),
+          BlocProvider(create: (context) => SuggestionBloc()),
+        ],
+            child: MainPage());
+      }
+    }
+    return SignIn();
   }
 }

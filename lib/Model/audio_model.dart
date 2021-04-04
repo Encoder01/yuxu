@@ -6,13 +6,13 @@ import 'package:audioplayers/audioplayers.dart';
 
 class AudioModel{
   String id;
-  String icon1;
-  String icon2;
+  String iconFav;
+  String iconEdit;
   List<Color> color;
   String sesPath;
   double volume;
   bool visible;
   AudioPlayer players;
-  AudioModel({this.id,this.volume,this.icon1,this.icon2,this.color,this.sesPath,this.visible,this.players});
+  AudioModel({this.id,this.volume,this.iconFav,this.iconEdit,this.color,this.sesPath,this.visible,this.players});
 
 }

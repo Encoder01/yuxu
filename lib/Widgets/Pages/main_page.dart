@@ -1,34 +1,30 @@
-
-//import 'package:facebook_audience_network/facebook_audience_network.dart';
+import 'package:audio_manager/audio_manager.dart';
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mindfocus/Controller/theme.dart';
-import 'package:mindfocus/Services/Admob.dart';
-import 'package:mindfocus/Widgets/Buttons/panel_btn.dart';
+import 'package:mindfocus/Model/effect_icons.dart';
+import 'package:mindfocus/Services/Suggestion.dart';
 import 'package:mindfocus/Widgets/Pages/effects_page.dart';
+import 'package:mindfocus/Widgets/Pages/favorite_page.dart';
 import 'package:mindfocus/Widgets/Pages/settings_page.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:mindfocus/Widgets/Pages/suggestion_page.dart';
 
 class MainPage extends StatefulWidget {
-  static bool isPlay = false;
-
   @override
   MainPageState createState() => MainPageState();
 }
 class MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin {
   int _selectedPage = 0;
-
   @override
   void initState() {
-    AdmobService().showBanner();
+  //  AdmobService().showBanner();
     super.initState();
   }
-
-
   @override
   void dispose() {
     super.dispose();
-    AdmobService().removeBanner();
+   // AdmobService().removeBanner();
   }
 
   @override
@@ -38,10 +34,18 @@ class MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin {
       body: Stack(children: [
         Offstage(
           offstage: _selectedPage != 0,
-          child: EffectsPage(),
+          child: SuggestionPage(),
         ),
         Offstage(
           offstage: _selectedPage != 1,
+          child: EffectsPage(),
+        ),
+        Offstage(
+          offstage: _selectedPage != 2,
+          child: FavoritePage(),
+        ),
+        Offstage(
+          offstage: _selectedPage != 3,
           child: SettingsPage(),
         ),
         /*Container(
@@ -53,6 +57,7 @@ class MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin {
               switch (result) {
                 case BannerAdResult.ERROR:
                   print("Error: $value");
+                  return Container();
                   break;
                 case BannerAdResult.LOADED:
                   print("Loaded: $value");
@@ -67,26 +72,34 @@ class MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin {
             },
           ),
         ),*/
-        Container(height: MediaQuery.of(context).size.height*0.83,
-            child: Center(child: Align(alignment: Alignment.bottomCenter,child: PanelButton())))
+
       ]),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: ThemeNotifier.Theme ? Color(0xFF051c21) : Color(0xFF082C33),
-        selectedIconTheme: IconThemeData(color: Colors.white),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.adjust),
-            label: "efekt".tr(),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'setngs'.tr(),
-          ),
-        ],
-        currentIndex: _selectedPage,
-        onTap: _onTapped,
+      bottomNavigationBar: new Theme(
+        data: Theme.of(context).copyWith(
+            canvasColor: Color(0xFF040D1B),),
+        child: BottomNavigationBar(
+          unselectedItemColor: Colors.white38,
+         selectedItemColor: Colors.white.withOpacity(0.9),
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              label: "Anasayfa"),
+            BottomNavigationBarItem(
+              icon: Icon(Effect.effect),
+              label: "efekt".tr(),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border),
+              label: "Favorite",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.more),
+              label: 'setngs'.tr(),
+            ),
+          ],
+          currentIndex: _selectedPage,
+          onTap: _onTapped,
+        ),
       ),
     );
   }

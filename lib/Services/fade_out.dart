@@ -75,6 +75,5 @@ class FadeOut {
     }else{
       PlayerController.resume();
     }
-
   }
 }

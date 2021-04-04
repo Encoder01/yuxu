@@ -24,139 +24,84 @@ dependencies:
   flutter:
     sdk: flutter
   #For Navigation and state package
-  path_provider: ^1.6.5
-  hive: ^1.4.4+1
-  hive_flutter: ^0.3.1
+  hive: ^2.0.0
+  hive_flutter: ^1.0.0
+  path_provider: ^2.0.1
+  provider: ^5.0.0
+  flutter_bloc: ^7.0.0
+  equatable: ^2.0.0
+  easy_localization: ^3.0.0
   #İmage Design more
   flutter_xlider: ^3.4.0
-  flutter_svg: ^0.19.0
-  timer_count_down: ^1.0.4+1
-  cupertino_icons: ^1.0.0
-  flushbar: ^1.10.4
+  flutter_svg: ^0.19.3
+  timer_count_down: ^2.0.0
+  cupertino_icons: ^1.0.2
+  another_flushbar: ^1.10.17
+  flutter_staggered_grid_view: ^0.3.4
   #players
   audio_manager: 0.5.5+3
-  audioplayers: 0.17.2
+  audioplayers: ^0.18.0
+  #backend
   http:
-  intl: ^0.16.1
-  easy_localization: ^2.3.3
-  facebook_app_events: ^0.8.2
-  #facebook_audience_network: ^0.8.0
-  firebase_admob: ^0.10.3
+  intl: ^0.17.0
+  uuid: ^3.0.2
+  facebook_app_events: ^0.11.1
+  firebase_analytics: ^7.1.1
+  facebook_audience_network: ^0.9.0
+  firebase_auth: ^1.0.1
+  google_sign_in: ^5.0.1
+  flutter_facebook_auth: ^3.1.1
+  firebase_core: ^1.0.1
+  cloud_firestore: ^1.0.3
+  url_launcher: ^6.0.2
+  #firebase_admob: ^0.10.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  hive_generator: ^0.8.2
+  hive_generator: ^1.0.0
   build_runner:
+# flutter pub run build_runner build
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:
   uses-material-design: true
   assets:
     - assets/translations/
+    - assets/signpage/google.png
+    - assets/signpage/facebook.png
+    - assets/signpage/Vector1.png
+    - assets/signpage/Vector2.png
+    - assets/signpage/Vector3.png
+    - assets/signpage/Vector4.png
+    - assets/signpage/Vector5.png
+    - assets/signpage/Vector6.png
     - assets/logo.jpg
-    - assets/Buttons/Nature/v1/icon_1.svg
-    - assets/Buttons/Nature/v1/icon_2.svg
-    - assets/Buttons/Nature/v1/icon_3.svg
-    - assets/Buttons/Nature/v1/icon_4.svg
-    - assets/Buttons/Nature/v1/icon_5.svg
-    - assets/Buttons/Nature/v1/icon_6.svg
-    - assets/Buttons/Nature/v1/icon_7.svg
-    - assets/Buttons/Nature/v1/icon_8.svg
-    - assets/Buttons/Nature/v1/icon_9.svg
-    #City icons
-    - assets/Buttons/City/v1/icon_1.svg
-    - assets/Buttons/City/v1/icon_2.svg
-    - assets/Buttons/City/v1/icon_3.svg
-    - assets/Buttons/City/v1/icon_4.svg
-    - assets/Buttons/City/v1/icon_5.svg
-    - assets/Buttons/City/v1/icon_6.svg
-    - assets/Buttons/City/v1/icon_7.svg
-    - assets/Buttons/City/v1/icon_8.svg
-    - assets/Buttons/City/v1/icon_9.svg
-    #Weather Icons
-    - assets/Buttons/Weather/v1/icon_1.svg
-    - assets/Buttons/Weather/v1/icon_2.svg
-    - assets/Buttons/Weather/v1/icon_3.svg
-    - assets/Buttons/Weather/v1/icon_4.svg
-    - assets/Buttons/Weather/v1/icon_5.svg
-    - assets/Buttons/Weather/v1/icon_6.svg
-    - assets/Buttons/Weather/v1/icon_7.svg
-    - assets/Buttons/Weather/v1/icon_8.svg
-    - assets/Buttons/Weather/v1/icon_9.svg
-    #Mind Icons
-    - assets/Buttons/Mind/v1/icon_1.svg
-    - assets/Buttons/Mind/v1/icon_2.svg
-    - assets/Buttons/Mind/v1/icon_3.svg
-    - assets/Buttons/Mind/v1/icon_4.svg
-    - assets/Buttons/Mind/v1/icon_5.svg
-    - assets/Buttons/Mind/v1/icon_6.svg
-    - assets/Buttons/Mind/v1/icon_7.svg
-    - assets/Buttons/Mind/v1/icon_8.svg
-    - assets/Buttons/Mind/v1/icon_9.svg
-    #Mix Icons
-    - assets/Buttons/Mix/v1/icon_1.svg
-    - assets/Buttons/Mix/v1/icon_2.svg
-    - assets/Buttons/Mix/v1/icon_3.svg
-    - assets/Buttons/Mix/v1/icon_4.svg
-    - assets/Buttons/Mix/v1/icon_5.svg
-    - assets/Buttons/Mix/v1/icon_6.svg
-    - assets/Buttons/Mix/v1/icon_7.svg
-    - assets/Buttons/Mix/v1/icon_8.svg
-    - assets/Buttons/Mix/v1/icon_9.svg
-    #---------Icons V2----------------#
-    - assets/Buttons/Nature/v2/icon_1a.svg
-    - assets/Buttons/Nature/v2/icon_2a.svg
-    - assets/Buttons/Nature/v2/icon_3a.svg
-    - assets/Buttons/Nature/v2/icon_4a.svg
-    - assets/Buttons/Nature/v2/icon_5a.svg
-    - assets/Buttons/Nature/v2/icon_6a.svg
-    - assets/Buttons/Nature/v2/icon_7a.svg
-    - assets/Buttons/Nature/v2/icon_8a.svg
-    - assets/Buttons/Nature/v2/icon_9a.svg
-    #City icons
-    - assets/Buttons/City/v2/icon_1a.svg
-    - assets/Buttons/City/v2/icon_2a.svg
-    - assets/Buttons/City/v2/icon_3a.svg
-    - assets/Buttons/City/v2/icon_4a.svg
-    - assets/Buttons/City/v2/icon_5a.svg
-    - assets/Buttons/City/v2/icon_6a.svg
-    - assets/Buttons/City/v2/icon_7a.svg
-    - assets/Buttons/City/v2/icon_8a.svg
-    - assets/Buttons/City/v2/icon_9a.svg
-    #Weather Icons
-    - assets/Buttons/Weather/v2/icon_1a.svg
-    - assets/Buttons/Weather/v2/icon_2a.svg
-    - assets/Buttons/Weather/v2/icon_3a.svg
-    - assets/Buttons/Weather/v2/icon_4a.svg
-    - assets/Buttons/Weather/v2/icon_5a.svg
-    - assets/Buttons/Weather/v2/icon_6a.svg
-    - assets/Buttons/Weather/v2/icon_7a.svg
-    - assets/Buttons/Weather/v2/icon_8a.svg
-    - assets/Buttons/Weather/v2/icon_9a.svg
-    #Mind Icons
-    - assets/Buttons/Mind/v2/icon_1a.svg
-    - assets/Buttons/Mind/v2/icon_2a.svg
-    - assets/Buttons/Mind/v2/icon_3a.svg
-    - assets/Buttons/Mind/v2/icon_4a.svg
-    - assets/Buttons/Mind/v2/icon_5a.svg
-    - assets/Buttons/Mind/v2/icon_6a.svg
-    - assets/Buttons/Mind/v2/icon_7a.svg
-    - assets/Buttons/Mind/v2/icon_8a.svg
-    - assets/Buttons/Mind/v2/icon_9a.svg
-    #Mix Icons
-    - assets/Buttons/Mix/v2/icon_1a.svg
-    - assets/Buttons/Mix/v2/icon_2a.svg
-    - assets/Buttons/Mix/v2/icon_3a.svg
-    - assets/Buttons/Mix/v2/icon_4a.svg
-    - assets/Buttons/Mix/v2/icon_5a.svg
-    - assets/Buttons/Mix/v2/icon_6a.svg
-    - assets/Buttons/Mix/v2/icon_7a.svg
-    - assets/Buttons/Mix/v2/icon_8a.svg
-    - assets/Buttons/Mix/v2/icon_9a.svg
+    #Süslemeler
+    - assets/susleme/dark/sus_1.svg
+    - assets/susleme/dark/sus_2.svg
+    - assets/susleme/dark/sus_3.svg
+    - assets/susleme/dark/sus_4.svg
+    - assets/susleme/dark/sus_5.svg
+    - assets/susleme/category_1.svg
+    - assets/susleme/category_2.svg
+    - assets/susleme/category_3.svg
+    - assets/susleme/category_4.svg
+    - assets/susleme/category_5.svg
+    - assets/susleme/favourite_page_background.svg
+    - assets/susleme/favourite.svg
+    - assets/susleme/homepage.svg
+    #Button_Vectors
+    - assets/Button_Vectors/0.svg
+    - assets/Button_Vectors/1.svg
+    - assets/Button_Vectors/2.svg
+    - assets/Button_Vectors/3.svg
+    - assets/Button_Vectors/4.svg
+    - assets/Button_Vectors/5.svg
+    - assets/Button_Vectors/6.svg
+    - assets/Button_Vectors/7.svg
+    - assets/Button_Vectors/8.svg
+    - assets/Button_Vectors/9.svg
+    - assets/Button_Vectors/10.svg
     #-----------Dark Buttons-----------#
     - assets/DarkButtons/Nature/v1/icon_1.svg
     - assets/DarkButtons/Nature/v1/icon_2.svg
@@ -257,6 +202,108 @@ flutter:
     - assets/DarkButtons/Mix/v2/icon_7a.svg
     - assets/DarkButtons/Mix/v2/icon_8a.svg
     - assets/DarkButtons/Mix/v2/icon_9a.svg
+   #-----------FavoriButtons---------------
+    # Forest
+    - assets/FavoriteButtons/cat1/icon_1.svg
+    - assets/FavoriteButtons/cat1/icon_2.svg
+    - assets/FavoriteButtons/cat1/icon_3.svg
+    - assets/FavoriteButtons/cat1/icon_4.svg
+    - assets/FavoriteButtons/cat1/icon_5.svg
+    - assets/FavoriteButtons/cat1/icon_6.svg
+    - assets/FavoriteButtons/cat1/icon_7.svg
+    - assets/FavoriteButtons/cat1/icon_8.svg
+    - assets/FavoriteButtons/cat1/icon_9.svg
+    #Weather
+    - assets/FavoriteButtons/cat2/icon_1.svg
+    - assets/FavoriteButtons/cat2/icon_2.svg
+    - assets/FavoriteButtons/cat2/icon_3.svg
+    - assets/FavoriteButtons/cat2/icon_4.svg
+    - assets/FavoriteButtons/cat2/icon_5.svg
+    - assets/FavoriteButtons/cat2/icon_6.svg
+    - assets/FavoriteButtons/cat2/icon_7.svg
+    - assets/FavoriteButtons/cat2/icon_8.svg
+    - assets/FavoriteButtons/cat2/icon_9.svg
+    #City
+    - assets/FavoriteButtons/cat3/icon_1.svg
+    - assets/FavoriteButtons/cat3/icon_2.svg
+    - assets/FavoriteButtons/cat3/icon_3.svg
+    - assets/FavoriteButtons/cat3/icon_4.svg
+    - assets/FavoriteButtons/cat3/icon_5.svg
+    - assets/FavoriteButtons/cat3/icon_6.svg
+    - assets/FavoriteButtons/cat3/icon_7.svg
+    - assets/FavoriteButtons/cat3/icon_8.svg
+    - assets/FavoriteButtons/cat3/icon_9.svg
+    #Mind
+    - assets/FavoriteButtons/cat4/icon_1.svg
+    - assets/FavoriteButtons/cat4/icon_2.svg
+    - assets/FavoriteButtons/cat4/icon_3.svg
+    - assets/FavoriteButtons/cat4/icon_4.svg
+    - assets/FavoriteButtons/cat4/icon_5.svg
+    - assets/FavoriteButtons/cat4/icon_6.svg
+    - assets/FavoriteButtons/cat4/icon_7.svg
+    - assets/FavoriteButtons/cat4/icon_8.svg
+    - assets/FavoriteButtons/cat4/icon_9.svg
+    #Mix
+    - assets/FavoriteButtons/cat5/icon_1.svg
+    - assets/FavoriteButtons/cat5/icon_2.svg
+    - assets/FavoriteButtons/cat5/icon_3.svg
+    - assets/FavoriteButtons/cat5/icon_4.svg
+    - assets/FavoriteButtons/cat5/icon_5.svg
+    - assets/FavoriteButtons/cat5/icon_6.svg
+    - assets/FavoriteButtons/cat5/icon_7.svg
+    - assets/FavoriteButtons/cat5/icon_8.svg
+    - assets/FavoriteButtons/cat5/icon_9.svg
+   #-----------EditButtons---------------
+    # Forest
+    - assets/EditButtons/cat1/icon_1.svg
+    - assets/EditButtons/cat1/icon_2.svg
+    - assets/EditButtons/cat1/icon_3.svg
+    - assets/EditButtons/cat1/icon_4.svg
+    - assets/EditButtons/cat1/icon_5.svg
+    - assets/EditButtons/cat1/icon_6.svg
+    - assets/EditButtons/cat1/icon_7.svg
+    - assets/EditButtons/cat1/icon_8.svg
+    - assets/EditButtons/cat1/icon_9.svg
+    #Weather
+    - assets/EditButtons/cat2/icon_1.svg
+    - assets/EditButtons/cat2/icon_2.svg
+    - assets/EditButtons/cat2/icon_3.svg
+    - assets/EditButtons/cat2/icon_4.svg
+    - assets/EditButtons/cat2/icon_5.svg
+    - assets/EditButtons/cat2/icon_6.svg
+    - assets/EditButtons/cat2/icon_7.svg
+    - assets/EditButtons/cat2/icon_8.svg
+    - assets/EditButtons/cat2/icon_9.svg
+    #City
+    - assets/EditButtons/cat3/icon_1.svg
+    - assets/EditButtons/cat3/icon_2.svg
+    - assets/EditButtons/cat3/icon_3.svg
+    - assets/EditButtons/cat3/icon_4.svg
+    - assets/EditButtons/cat3/icon_5.svg
+    - assets/EditButtons/cat3/icon_6.svg
+    - assets/EditButtons/cat3/icon_7.svg
+    - assets/EditButtons/cat3/icon_8.svg
+    - assets/EditButtons/cat3/icon_9.svg
+    #Mind
+    - assets/EditButtons/cat4/icon_1.svg
+    - assets/EditButtons/cat4/icon_2.svg
+    - assets/EditButtons/cat4/icon_3.svg
+    - assets/EditButtons/cat4/icon_4.svg
+    - assets/EditButtons/cat4/icon_5.svg
+    - assets/EditButtons/cat4/icon_6.svg
+    - assets/EditButtons/cat4/icon_7.svg
+    - assets/EditButtons/cat4/icon_8.svg
+    - assets/EditButtons/cat4/icon_9.svg
+    #Mix
+    - assets/EditButtons/cat5/icon_1.svg
+    - assets/EditButtons/cat5/icon_2.svg
+    - assets/EditButtons/cat5/icon_3.svg
+    - assets/EditButtons/cat5/icon_4.svg
+    - assets/EditButtons/cat5/icon_5.svg
+    - assets/EditButtons/cat5/icon_6.svg
+    - assets/EditButtons/cat5/icon_7.svg
+    - assets/EditButtons/cat5/icon_8.svg
+    - assets/EditButtons/cat5/icon_9.svg
    #-----------sesler----------------------
     # Nature Sounds
     - assets/ses/Nature/forest_birds.m4a
@@ -308,17 +355,7 @@ flutter:
     - assets/ses/Mix/mix_sualti.m4a
     - assets/ses/Mix/mix_sayfa.m4a
     - assets/ses/Mix/mix_bicak.m4a
-    #Süslemeler
-    - assets/susleme/light/sus_1.svg
-    - assets/susleme/light/sus_2.svg
-    - assets/susleme/light/sus_3.svg
-    - assets/susleme/light/sus_4.svg
-    - assets/susleme/light/sus_5.svg
-    - assets/susleme/dark/sus_1.svg
-    - assets/susleme/dark/sus_2.svg
-    - assets/susleme/dark/sus_3.svg
-    - assets/susleme/dark/sus_4.svg
-    - assets/susleme/dark/sus_5.svg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -331,17 +368,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: Effect
+      fonts:
+        - asset: assets/fonts/Effect.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

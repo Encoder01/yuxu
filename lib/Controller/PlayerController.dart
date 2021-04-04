@@ -2,10 +2,9 @@
 
 import 'package:audioplayers/audio_cache.dart';
 import 'package:mindfocus/Model/audio_model.dart';
-class PlayerController  {
-  static bool isEfect = true;
-  static bool isMusic = true;
 
+import 'countProv.dart';
+class PlayerController  {
   static List<AudioModel> audios=[];
   static List<AudioModel> Players =[];
 
@@ -22,7 +21,15 @@ class PlayerController  {
       element.players.release();
     });
     AudioCache().clearCache();
+    Players.forEach((element) {
+      audios
+          .singleWhere((elementaudio) =>
+      elementaudio.id ==
+          element.players.playerId)
+          .visible = false;
+    });
     Players.clear();
+    CounterNotifier.sifirla();
   }
   static pause(){
     Players.forEach((element) {

@@ -2,30 +2,21 @@
 import 'package:flutter/material.dart';
 
 class CounterNotifier extends ValueNotifier<int> {
-  static ValueNotifier<int> sayiKontrol=ValueNotifier(0);
+  static ValueNotifier<int> EfektSayiKontrol=ValueNotifier(0);
 
   CounterNotifier(int value) : super(value);
-
-
-
-
   static void increment() {
-    sayiKontrol.value++;
-    print("sayiKontrol.value*************************");
-  //  notifyListeners();
+    EfektSayiKontrol.value++;
   }
   static void sifirla(){
-  sayiKontrol.value=0;
-//notifyListeners();
+  EfektSayiKontrol.value=0;
   }
   static void updateUI(){
     increment();
     decrement();
-  //notifyListeners();
   }
   static void decrement() {
-  sayiKontrol.value--;
- // notifyListeners();
+  EfektSayiKontrol.value--;
   }
 }
 
