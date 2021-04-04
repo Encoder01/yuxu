@@ -48,57 +48,65 @@ class MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin {
           offstage: _selectedPage != 3,
           child: SettingsPage(),
         ),
-        /*Container(
-          alignment: Alignment(0.5, 1),
-          child: FacebookBannerAd(
-            placementId: "148593593386504_148593640053166",
-            bannerSize: BannerSize.STANDARD,
-            listener: (result, value) {
-              switch (result) {
-                case BannerAdResult.ERROR:
-                  print("Error: $value");
-                  return Container();
-                  break;
-                case BannerAdResult.LOADED:
-                  print("Loaded: $value");
-                  break;
-                case BannerAdResult.CLICKED:
-                  print("Clicked: $value");
-                  break;
-                case BannerAdResult.LOGGING_IMPRESSION:
-                  print("Logging Impression: $value");
-                  break;
-              }
-            },
-          ),
-        ),*/
+        /*,*/
 
       ]),
       bottomNavigationBar: new Theme(
         data: Theme.of(context).copyWith(
+
             canvasColor: Color(0xFF040D1B),),
-        child: BottomNavigationBar(
-          unselectedItemColor: Colors.white38,
-         selectedItemColor: Colors.white.withOpacity(0.9),
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              label: "Anasayfa"),
-            BottomNavigationBarItem(
-              icon: Icon(Effect.effect),
-              label: "efekt".tr(),
+        child: Wrap(
+          children: [
+            Container(
+              child: BottomNavigationBar(
+                unselectedItemColor: Colors.white38,
+               selectedItemColor: Colors.white.withOpacity(0.9),
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home_outlined),
+                    label: "Anasayfa"),
+                  BottomNavigationBarItem(
+                    icon: Icon(Effect.effect),
+                    label: "efekt".tr(),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite_border),
+                    label: "Favorite",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.more),
+                    label: 'setngs'.tr(),
+                  ),
+                ],
+                currentIndex: _selectedPage,
+                onTap: _onTapped,
+              ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border),
-              label: "Favorite",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.more),
-              label: 'setngs'.tr(),
-            ),
+            Container(
+              alignment: Alignment(0.5, 1),
+              child: FacebookBannerAd(
+                placementId: "148593593386504_148593640053166",
+                bannerSize: BannerSize.STANDARD,
+                listener: (result, value) {
+                  switch (result) {
+                    case BannerAdResult.ERROR:
+                      print("Error: $value");
+                      return Container();
+                      break;
+                    case BannerAdResult.LOADED:
+                      print("Loaded: $value");
+                      break;
+                    case BannerAdResult.CLICKED:
+                      print("Clicked: $value");
+                      break;
+                    case BannerAdResult.LOGGING_IMPRESSION:
+                      print("Logging Impression: $value");
+                      break;
+                  }
+                },
+              ),
+            )
           ],
-          currentIndex: _selectedPage,
-          onTap: _onTapped,
         ),
       ),
     );

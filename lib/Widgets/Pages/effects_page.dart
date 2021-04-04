@@ -127,10 +127,13 @@ class _EffectsPageState extends State<EffectsPage> with SingleTickerProviderStat
                   bottom: 0,
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                        width: double.maxFinite,
-                        height: 55,
-                        child: Center(child: PanelButton(color))),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: SizedBox(
+                          width: double.maxFinite,
+                          height: 55,
+                          child: Center(child: PanelButton(color))),
+                    ),
                   )),
             ],
           ),

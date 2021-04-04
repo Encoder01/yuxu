@@ -70,32 +70,81 @@ class _PanelButtonState extends State<PanelButton> with TickerProviderStateMixin
             return Transform.scale(
               scale: scaleAnimation.value,
               child: Container(
-                height: 60,
-                color: widget.color,
+                decoration: BoxDecoration(
+                    color: widget.color,
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
                 child: Stack(
                   children: [
-                    Positioned(top:5,left:10,child: Text("Edit Your Sounds")),
-
-                    Positioned(
-                      bottom: 0,
+                    Align(
+                        alignment: Alignment.topCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text("Current Mix"),
+                        )),
+                    Align(
+                    alignment: Alignment.bottomCenter,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children:
                         PlayerController.Players.isNotEmpty?PlayerController.Players.map((e)
                         => Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: SvgPicture.asset(e.iconFav,width: 20,height: 20,fit: BoxFit.fitHeight,),
+                          padding: const EdgeInsets.all(3.0),
+                          child: SvgPicture.asset(e.iconFav, height: 18,),
                         )).toList():[],
                       ),
                     ),
-                    Positioned(
-                      right: 0,
-                      child: IconButton(
-                        icon: Icon(Icons.arrow_forward_ios),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (_)=>PanelDialog()));
-                        },
-                        iconSize: 32,
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: IconButton(
+                          icon: Icon(Icons.keyboard_arrow_up),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (_)=>PanelDialog()));
+                          },
+                          iconSize: 32,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ValueListenableBuilder<bool>(
+                            valueListenable: IsplayNotifier.efectPlayerNotifier,
+                            builder: (BuildContext context, value, Widget child) {
+                            return CircleAvatar(
+                              backgroundColor: Colors.white.withOpacity(0.3),
+                              radius: 20,
+                              child: CircleAvatar(
+                                backgroundColor: Colors.white.withOpacity(0.9),
+                                radius: 15,
+                                child: IconButton(
+                                  icon: Icon(
+                                    value ? Icons.pause : Icons.play_arrow,
+                                    color: Color(0xFF30313C),
+                                  ),
+                                  onPressed: () {
+                                    if (value) {
+                                      IsplayNotifier.setTogglePlay();
+                                      PanelDialog.controller.pause();
+                                      PlayerController.pause();
+                                      AudioManager.instance.updateNtf(false);
+                                    } else {
+                                      IsplayNotifier.setTogglePlay();
+                                      PanelDialog.controller.resume();
+                                      PlayerController.resume();
+                                      AudioManager.instance.updateNtf(true);
+                                    }
+                                    setState(() {});
+                                  },
+                                  iconSize: 15,
+                                ),
+                              ),
+                            );
+                          }
+                        ),
                       ),
                     ),
                   ],
