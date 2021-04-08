@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -6,16 +7,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:mindfocus/Bloc/daily_mix/daily_mix_bloc.dart';
 import 'package:mindfocus/Bloc/favplayer_bloc.dart';
-import 'package:mindfocus/Bloc/suggestion_bloc.dart';
+import 'package:mindfocus/Bloc/quotes/quotes_bloc.dart';
+import 'package:mindfocus/Bloc/recommend/recommend_bloc.dart';
 import 'package:mindfocus/Model/favorites_model.dart';
 import 'package:mindfocus/Services/authentication.dart';
-import 'package:mindfocus/Widgets/Pages/main_page.dart';
+import 'package:mindfocus/Widgets/SignPage/get_started.dart';
 import 'package:mindfocus/Widgets/SignPage/sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'Model/favorites.dart';
+import 'Widgets/MainPage/main_page.dart';
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -26,13 +30,18 @@ main() async {
   await Hive.openBox<FavoritesModel>("favoritesModel");
   Hive.registerAdapter(FavoritesAdapter());
   await Hive.openBox<Favorites>("favorites");
+  await Hive.openBox<List<String>>("hashtags");
   runApp(
-    EasyLocalization(
-      child: MyApp(),
-      startLocale: Locale('en', 'US'),
-      supportedLocales: [Locale('en', 'US'),Locale('tr', 'TR'),Locale('ru', 'RU')],
-      path: 'assets/translations',
-      fallbackLocale: Locale('en', 'US'),
+    DevicePreview(
+      enabled: false,
+        builder: (_)=>EasyLocalization(
+     child: MyApp(),
+     startLocale: Locale('en', 'US'),
+     supportedLocales: [
+       Locale('en', 'US'),Locale('tr', 'TR'),Locale('ru', 'RU')],
+     path: 'assets/translations',
+     fallbackLocale: Locale('en', 'US'),
+   ),
     ),
   );
 }
@@ -70,7 +79,9 @@ class AuthenticationWrapper extends StatelessWidget {
       if(firebaseUser.emailVerified||firebaseUser.isAnonymous){
         return MultiBlocProvider(providers: [
           BlocProvider(create: (context) => FavplayerBloc()),
-          BlocProvider(create: (context) => SuggestionBloc()),
+          BlocProvider(create: (context) => RecommendBloc()),
+          BlocProvider(create: (context) => DailyMixBloc()),
+          BlocProvider(create: (context) => QuotesBloc()),
         ],
             child: MainPage());
       }

@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:audio_manager/audio_manager.dart';
-import 'package:mindfocus/Widgets/Pages/settings_page.dart';
+
 import 'package:mindfocus/Controller/PlayerController.dart';
+import 'package:mindfocus/Widgets/SettingsPages/settings_page.dart';
 
 class FadeOut {
   fadeOut() {
@@ -53,6 +54,7 @@ class FadeOut {
     }
   }
 
+  // ignore: non_constant_identifier_names
   FadeIn() {
     double _start = 0;
     double fVolume = 0.2;

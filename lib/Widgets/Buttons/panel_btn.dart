@@ -6,11 +6,8 @@ import 'package:mindfocus/Controller/PlayerController.dart';
 import 'package:mindfocus/Controller/countProv.dart';
 import 'package:mindfocus/Controller/isplaynotifier.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:mindfocus/Services/fade_out.dart';
 import 'package:mindfocus/Widgets/EditPages/efekt_edit.dart';
-import 'package:mindfocus/Widgets/Pages/settings_page.dart';
-import 'package:timer_count_down/timer_count_down.dart';
-
+import 'package:page_transition/page_transition.dart';
 class PanelButton extends StatefulWidget {
   Color color;
   PanelButton(this.color);
@@ -20,7 +17,6 @@ class PanelButton extends StatefulWidget {
 
 class _PanelButtonState extends State<PanelButton> with TickerProviderStateMixin {
   bool visible;
-
   AnimationController _controller;
   var scaleAnimation;
   CounterNotifier counterNotifier;
@@ -29,7 +25,7 @@ class _PanelButtonState extends State<PanelButton> with TickerProviderStateMixin
     counterNotifier = CounterNotifier(0);
     visible = false;
     _controller = AnimationController(
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 1),
       vsync: this,
     ) ..addListener(() {
       setState(() {});
@@ -37,7 +33,8 @@ class _PanelButtonState extends State<PanelButton> with TickerProviderStateMixin
     scaleAnimation = new Tween(
       begin: 0.0,
       end: 1.0,
-    ).animate(new CurvedAnimation(parent: _controller, curve: Curves.linearToEaseOut));
+
+    ).animate(new CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     super.initState();
   }
   @override
@@ -71,42 +68,51 @@ class _PanelButtonState extends State<PanelButton> with TickerProviderStateMixin
               scale: scaleAnimation.value,
               child: Container(
                 decoration: BoxDecoration(
-                    color: widget.color,
-                    borderRadius: BorderRadius.all(Radius.circular(20))
+                    color: widget.color.withOpacity(0.9),
+                    borderRadius: BorderRadius.all(Radius.circular(8))
                 ),
                 child: Stack(
                   children: [
-                    Align(
-                        alignment: Alignment.topCenter,
+
+
+                    Row(children: [
+                      Align(
+                        alignment: Alignment.bottomLeft,
                         child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text("Current Mix"),
-                        )),
-                    Align(
-                    alignment: Alignment.bottomCenter,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children:
-                        PlayerController.Players.isNotEmpty?PlayerController.Players.map((e)
-                        => Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: SvgPicture.asset(e.iconFav, height: 18,),
-                        )).toList():[],
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: IconButton(
-                          icon: Icon(Icons.keyboard_arrow_up),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (_)=>PanelDialog()));
-                          },
-                          iconSize: 32,
+                          padding: const EdgeInsets.all(8.0),
+                          child: IconButton(
+                            icon: Icon(Icons.keyboard_arrow_up,color: Colors.white,size: 32,),
+                            onPressed: () {
+                              Navigator.push(context, PageTransition(type:
+                              PageTransitionType.bottomToTop, duration:
+                              Duration(milliseconds:650),
+                                  child: PanelDialog()));
+                            },
+
+                          ),
                         ),
                       ),
-                    ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top:6.0,left:5.0,bottom: 3.0),
+                          child: Text("Current Mix",style: TextStyle(color: Colors.white.withOpacity(0.9)),),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children:
+                            PlayerController.Players.isNotEmpty?PlayerController.Players.map((e)
+                            => Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: SvgPicture.asset(e.iconFav, height: 19,),
+                            )).toList():[],
+                          ),
+                        ),],),
+                    ],),
+
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
@@ -114,34 +120,27 @@ class _PanelButtonState extends State<PanelButton> with TickerProviderStateMixin
                         child: ValueListenableBuilder<bool>(
                             valueListenable: IsplayNotifier.efectPlayerNotifier,
                             builder: (BuildContext context, value, Widget child) {
-                            return CircleAvatar(
-                              backgroundColor: Colors.white.withOpacity(0.3),
-                              radius: 20,
-                              child: CircleAvatar(
-                                backgroundColor: Colors.white.withOpacity(0.9),
-                                radius: 15,
-                                child: IconButton(
-                                  icon: Icon(
-                                    value ? Icons.pause : Icons.play_arrow,
-                                    color: Color(0xFF30313C),
-                                  ),
-                                  onPressed: () {
-                                    if (value) {
-                                      IsplayNotifier.setTogglePlay();
-                                      PanelDialog.controller.pause();
-                                      PlayerController.pause();
-                                      AudioManager.instance.updateNtf(false);
-                                    } else {
-                                      IsplayNotifier.setTogglePlay();
-                                      PanelDialog.controller.resume();
-                                      PlayerController.resume();
-                                      AudioManager.instance.updateNtf(true);
-                                    }
-                                    setState(() {});
-                                  },
-                                  iconSize: 15,
-                                ),
+                            return IconButton(
+                              icon: Icon(
+                                value ? Icons.pause : Icons.play_arrow,
+                                color: Colors.white,
+                                size: 32,
                               ),
+                              onPressed: () {
+                                if (value) {
+                                  IsplayNotifier.setTogglePlay();
+                                  PanelDialog.controller.pause();
+                                  PlayerController.pause();
+                                  AudioManager.instance.updateNtf(false);
+                                } else {
+                                  IsplayNotifier.setTogglePlay();
+                                  PanelDialog.controller.resume();
+                                  PlayerController.resume();
+                                  AudioManager.instance.updateNtf(true);
+                                }
+                                setState(() {});
+                              },
+                              iconSize: 15,
                             );
                           }
                         ),

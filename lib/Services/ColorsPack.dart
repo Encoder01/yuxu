@@ -8,21 +8,41 @@ class ColorsPack {
 
   static List colors = [
     Color(0xFF1ABC9C),
-    Color(0xFF16A085),
     Color(0xFF2ECC71),
-    Color(0xFF27AE60),
     Color(0xFF3498DB),
-    Color(0xFF2980B9),
     Color(0xFF9B59B6),
-    Color(0xFF8E44AD),
     Color(0xFF34495E),
-    Color(0xFF2C3E50),
     Color(0xFFF1C40F),
-    Color(0xFFF39C12),
     Color(0xFFE67E22),
-    Color(0xFFD35400),
     Color(0xFFE74C3C),
+
     Color(0xFFC0392B),
+    Color(0xFFD35400),
+    Color(0xFFF39C12),
+    Color(0xFF2C3E50),
+    Color(0xFF8E44AD),
+    Color(0xFF2980B9),
+    Color(0xFF27AE60),
+    Color(0xFF16A085),
+  ];
+  static List colors2 = [
+    Color(0xFF78D9CC),
+    Color(0xFF1D7E85),
+    Color(0xFF192B72),
+    Color(0xFFA73457),
+    Color(0xFF172A6A),
+    Color(0xFFF3DD12),
+    Color(0xFFD3C500),
+    Color(0xFFC23CA3),
+
+    Color(0xFFD18D86),
+    Color(0xFFDB9B71),
+    Color(0xFFEBBF7A),
+    Color(0xFF879099),
+    Color(0xFFB893C8),
+    Color(0xFF85B1CE),
+    Color(0xFF84C8A1),
+    Color(0xFF7CC1B4),
   ];
   static List svgPath = [
     "assets/Button_Vectors/0.svg",

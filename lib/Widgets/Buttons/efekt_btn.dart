@@ -1,11 +1,9 @@
-import 'dart:io';
 
 import 'package:audio_manager/audio_manager.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,10 +17,8 @@ import 'package:mindfocus/Controller/isplaynotifier.dart';
 import 'package:mindfocus/Services/fade_out.dart';
 import 'package:mindfocus/Controller/PlayerController.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:mindfocus/Widgets/Pages/favorite_page.dart';
-import 'package:mindfocus/Widgets/Pages/suggestion_page.dart';
-
-
+import 'package:mindfocus/Widgets/DiscoveryPage/suggestion_page.dart';
+import 'package:mindfocus/Widgets/FavoritePage/favorite_page.dart';
 
 class EfektButton extends StatefulWidget {
   String icon;
@@ -128,6 +124,7 @@ class _EfektButtonState extends State<EfektButton>
                           if (IsplayNotifier.efectPlayerNotifier.value == false && value>1)
                           {
                             FadeOut().FadeIn();
+                            IsplayNotifier.setTruePlay();
                           }
                           else if (IsplayNotifier.efectPlayerNotifier.value == false)
                           {

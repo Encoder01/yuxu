@@ -2,8 +2,6 @@ import 'dart:ui';
 
 import 'package:audioplayers/audioplayers.dart';
 
-
-
 class AudioModel{
   String id;
   String iconFav;
@@ -14,5 +12,4 @@ class AudioModel{
   bool visible;
   AudioPlayer players;
   AudioModel({this.id,this.volume,this.iconFav,this.iconEdit,this.color,this.sesPath,this.visible,this.players});
-
 }

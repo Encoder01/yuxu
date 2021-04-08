@@ -1,3 +1,4 @@
+import 'package:audio_manager/audio_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,17 +8,19 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mindfocus/Controller/FavoriController.dart';
 import 'package:mindfocus/Controller/PlayerController.dart';
 import 'package:mindfocus/Controller/countProv.dart';
+import 'package:mindfocus/Controller/isplaynotifier.dart';
 import 'package:mindfocus/Model/favorites.dart';
 import 'package:mindfocus/Model/favorites_model.dart';
 import 'package:mindfocus/Services/ColorsPack.dart';
-import 'package:mindfocus/Widgets/Pages/favorite_page.dart';
+import 'package:mindfocus/Widgets/FavoritePage/favorite_page.dart';
+
 
 class FavoriEdit extends StatefulWidget {
   String favoriID;
   String name;
   Favorites currentFav;
-
-  FavoriEdit({this.favoriID, this.currentFav, this.name});
+  int index;
+  FavoriEdit({this.favoriID,this.index, this.currentFav, this.name});
 
   @override
   _FavoriEditState createState() => _FavoriEditState();
@@ -219,6 +222,32 @@ class _FavoriEditState extends State<FavoriEdit> {
                                 ),
                               ),
                             ),
+                            CircleAvatar(
+                              backgroundColor: Color(0xFFEBF5FB),
+                              radius: 20,
+                              child: IconButton(
+                                  iconSize: 20,
+                                  onPressed: () async{
+                                    if (FavoritePage.currentPlay && widget.favoriID == widget.currentFav.ID) {
+                                      if (IsplayNotifier.Isfavori.value) {
+                                        FavoriController.stopall();
+                                        IsplayNotifier.setFalseFavori();
+                                      }
+                                      AudioManager.instance.toPause();
+                                    }
+                                    for (int i = 0; i < box.values.length; i++) {
+                                     if (box.getAt(i).ID == widget.favoriID ){
+                                        ColorsPack.i.removeAt(i);
+                                        box.deleteAt(i);
+                                      }
+                                    }
+                                    Navigator.pop(context);
+                                  },
+                                  icon: Icon(
+                                    Icons.clear,
+                                    color: ColorsPack.colors[ColorsPack.i[widget.index]],
+                                  )),
+                            )
                           ],
                         ),
                       ],
